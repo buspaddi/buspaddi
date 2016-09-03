@@ -1,0 +1,98 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+
+<dom-module id="bus-list">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      paper-material {
+        background: #FFFFFF;
+        max-width: 400px;
+        padding: 24px;
+        margin: 10px auto;
+      }
+      .something{
+        display: inline-block;
+        width: 100%;
+      }
+       .something-lef{
+      width: 50%;
+      margin: 0px;
+      display: inline;
+      }
+      .something-left{
+        
+        float: right;
+      }
+      h2{
+        display: inline;
+      }
+    </style>
+
+    <!--<template is="dom-repeat" items="{{bdetails}}">
+      <paper-material elevation="1">
+      <h1><center>[[item.bus]]</center></h1>
+        <div class="something">
+         <div class="something-lef"> FROM <h2>[[item.from]]</h2></div>
+         <div class="something-left"> TO <h2>[[item.to]]</h2></div>
+        </div>
+
+        <div class="layout horizontal wrap">
+          <p>DEPARTURE TIME: <span>[[item.time]]</span>
+          <span>PRICE: [[item.price]]</span></p>
+          <paper-button on-tap="fireCall"></paper-button>
+      </paper-material>
+    </template>-->
+
+    <firebase-query
+    id="query"
+    app-name="buspaddi"
+    path="/bus-list/[[uid]]"
+    data="{{data}}">
+  </firebase-query>
+
+    <template is="dom-repeat" items="data" as="bp">
+      <div>[[bp]]</div>
+    </template>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      is: 'bus-list',
+
+      properties: {
+        uid: String,
+        data: {
+          type: Object,
+          observer: 'dataChanged'
+        }
+      },
+
+      dataChanged: function(newData, oldData){
+        console.log(newData, oldData);
+      }
+
+    });
+
+  </script>
+
+</dom-module>

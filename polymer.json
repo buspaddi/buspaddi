@@ -1,0 +1,11 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/bus-paddy.html",
+  "fragments": [
+    "src/bus-home.html",
+    "src/bus-records.html",
+    "src/bus-payment.html",
+    "src/bus-copy.html",
+    "src/bus-list.html"
+  ]
+}

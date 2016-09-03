@@ -1,0 +1,87 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/gold-cc-input/gold-cc-input.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="../bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html">
+
+<dom-module id="bus-payment">
+
+  <template>
+  
+   <style>
+      :host {
+        display: block;
+      }
+
+    .form-title {
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      display: inline-block;
+        width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #3367d6;
+      margin-right: 20px;
+  }
+
+  .company {
+    color: #3367d6;
+    font-size: 20px;
+    font-weight: 200;
+  }
+  gold-cc-expiration-input {
+  width: 50%;
+  float: left;
+  margin-right: 20px;
+}
+  paper-button {
+      background-color: #4285f4;
+      color: #fff;
+      margin-top: 50px;
+      width: 100%;
+  }
+  .some{
+    display: inline;
+    width: 100%;
+  }
+  gold-cc-cvc-input{
+    width: 40%;
+    margin: 0px;
+    float: right;
+
+
+  }
+    </style>
+
+    <div class="horizontal layout center form-title">
+    <div class="avatar" item-icon></div>
+    <div class="flex company">Bus Paddy</div>
+    </div>
+
+    <form is="iron-form" id="form" method="post" action="/checkout">
+      <paper-input name="name" label="Name on card" required autocomplete="cc-name"></paper-input>
+      <gold-cc-input name="cc-number" required auto-validate card-type="{{typeOfCard}}"></gold-cc-input>
+      <div class="some">
+        <gold-cc-expiration-input name="cc-expiration" required auto-validate label="Expiration"></gold-cc-expiration-input>
+        <gold-cc-cvc-input name="cc-cvc" required auto-validate card-type="[[typeOfCard]]"></gold-cc-cvc-input>
+      </div>
+      <paper-button on-click="_submit">Pay</paper-button>
+  </form>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'bus-payment'
+
+    });
+  </script>
+
+</dom-module>
